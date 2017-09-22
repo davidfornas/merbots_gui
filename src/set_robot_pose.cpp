@@ -46,7 +46,7 @@ void SetRobotPoseDlg::getMarkerPoseButtonClicked()
 	getMarkerData = true;
 }
 
-
+/*
 //ToDo: change topic type
 void SetRobotPoseDlg::get500MarkerPose(const auv_msgs::NavSts::ConstPtr& g500OdometryInfo)
 {
@@ -60,7 +60,7 @@ void SetRobotPoseDlg::get500MarkerPose(const auv_msgs::NavSts::ConstPtr& g500Odo
 		ui->yawValue->setText(QString::number(g500OdometryInfo->position.north));
 		getMarkerData = false;
 	}
-}
+}*/
 
 
 void SetRobotPoseDlg::acceptButtonClicked()

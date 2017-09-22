@@ -26,7 +26,7 @@
 #include <ros/ros.h>
 #endif
 #include <ros/package.h>
-#include <auv_msgs/NavSts.h>
+//#include <auv_msgs/NavSts.h>
 #include <diagnostic_msgs/DiagnosticArray.h>
 
 namespace Ui {
@@ -51,7 +51,7 @@ public:
 	/******************************************
 	** Implemenation [Callbacks]
 	*******************************************/
-    void get500MarkerPose(const auv_msgs::NavSts::ConstPtr& g500OdometryInfo);
+    //void get500MarkerPose(const auv_msgs::NavSts::ConstPtr& g500OdometryInfo);
 
 Q_SIGNALS:
 	void newRobotPose(double x, double y, double z, double roll, double pitch, double yaw);

@@ -36,14 +36,14 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <std_srvs/Empty.h>
-#include <auv_msgs/NavSts.h>
-#include <auv_msgs/BodyVelocityReq.h>
-#include <auv_msgs/WorldWaypointReq.h>
-#include <cola2_msgs/BatteryLevel.h>
-#include <cola2_msgs/EmusBms.h>
-#include <cola2_msgs/TotalTime.h>
-#include <cola2_msgs/Goto.h>
-#include <cola2_msgs/Setpoints.h>
+//#include <auv_msgs/NavSts.h>
+//#include <auv_msgs/BodyVelocityReq.h>
+//#include <auv_msgs/WorldWaypointReq.h>
+//#include <cola2_msgs/BatteryLevel.h>
+//#include <cola2_msgs/EmusBms.h>
+//#include <cola2_msgs/TotalTime.h>
+//#include <cola2_msgs/Goto.h>
+//#include <cola2_msgs/Setpoints.h>
 #include <diagnostic_msgs/DiagnosticArray.h>
 #include <sensor_msgs/image_encodings.h>
 #include <sensor_msgs/Joy.h>
@@ -137,12 +137,10 @@ public Q_SLOTS:
     void g500StopStream2();
     void g500GoToSurface();
     void g500GoToPositionButtonClicked();
-    void setRobotPosition(double xValueSrv, double yValueSrv, double zValueSrv, 
+    void setRobotPosition(double xValueSrv, double yValueSrv, double zValueSrv,
                         double rollValueSrv, double pitchValueSrv, double yawValueSrv);
 
-	void sparusTopicsButtonClicked();
-    void sparusLoadStream();
-    void sparusStopStream();
+
 
     void getInitGraspPose();
     void getInitGraspPoseRansac();
@@ -164,15 +162,11 @@ public Q_SLOTS:
     void removeLastWaypoint();
     void armTopicButtonClicked();
 
-    void vsPublishButtonClicked();
-    void vsStartCameraButtonClicked();
-    void vsCancelButtonClicked();
-    void vsTopicsButtonClicked();
-    void vsRotationButtonClicked();
 
 	/******************************************
 	** Implemenation [Callbacks]
 	*******************************************/
+    /*
 	void g500OdometryCallback(const auv_msgs::NavSts::ConstPtr& g500OdometryInfo);
     void g500MergedBodyVelCallback(const auv_msgs::BodyVelocityReq::ConstPtr& g500MergedBodyVelInfo);
     void g500MergedWorldCallback(const auv_msgs::WorldWaypointReq::ConstPtr& g500MergedWorldInfo);
@@ -181,28 +175,13 @@ public Q_SLOTS:
 	void g500DiagnosticsCallback(const diagnostic_msgs::DiagnosticArray::ConstPtr& g500DiagnosticsInfo);
     void g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg);
 
-	void sparusOdometryCallback(const auv_msgs::NavSts::ConstPtr& sparusOdometryInfo);
-    void sparusMergedBodyVelCallback(const auv_msgs::BodyVelocityReq::ConstPtr& sparusMergedBodyVelInfo);
-    void sparusMergedWorldCallback(const auv_msgs::WorldWaypointReq::ConstPtr& sparusMergedWorldInfo);
-	void sparusBatteryCallback(const cola2_msgs::EmusBms::ConstPtr& sparusBatteryInfo);
-	void sparusRunningTimeCallback(const cola2_msgs::TotalTime::ConstPtr& sparusRunningTimeInfo);
-	void sparusDiagnosticsCallback(const diagnostic_msgs::DiagnosticArray::ConstPtr& sparusDiagnosticsInfo);
-    void sparusCameraCallback(const sensor_msgs::Image::ConstPtr& msg);
-
+*/
     void armStateCallback(const sensor_msgs::JointState::ConstPtr& armStateMsg);
     void specParamsCallback(const std_msgs::Float32MultiArrayConstPtr& specificationParams);
-
-    void vsInputImageCallback(const sensor_msgs::Image::ConstPtr& msg);
-    void vsResultImageCallback(const sensor_msgs::Image::ConstPtr& msg);
-
 
 
 private Q_SLOTS:
 
-protected:
-    bool eventFilter(QObject *, QEvent *);
-    void updateROI(int x0, int y0, int x1, int y1);
-    void mouseReleaseEvent(QMouseEvent *);
 
 private:
 	Ui::MainWindowDesign	ui;
@@ -215,14 +194,6 @@ private:
     int width, height;
     int x0,y0,x1,y1;
 
-    void startROI(int x0, int y0);
-    void endROI(int x1, int y1);
-    void drawCurrentROI();
-    void updatePoint(int x, int y);
-    bool validPoint(int x, int y);
-    void notifyPoint(int x, int y);
-    bool pointIn(int x, int y);
-    void showCropROI();
 
 };
 

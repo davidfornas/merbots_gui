@@ -20,15 +20,12 @@
   <build_depend>std_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
-  <build_depend>auv_msgs</build_depend>
   <build_depend>diagnostic_msgs</build_depend>
-  <build_depend>cola2_msgs</build_depend>
   <build_depend>image_transport</build_depend>
   <build_depend>cv_bridge</build_depend>
   <build_depend>OpenCV</build_depend>
   <build_depend>OpenGL</build_depend>
   <build_depend>compressed_image_transport</build_depend>
-  <build_depend>merbots_ibvs</build_depend>
 
   <run_depend>qt_build</run_depend>
   <run_depend>roscpp</run_depend>
@@ -37,14 +34,10 @@
   <run_depend>std_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>nav_msgs</run_depend>
-  <run_depend>auv_msgs</run_depend>
   <run_depend>diagnostic_msgs</run_depend>
-  <run_depend>cola2_msgs</run_depend>
   <run_depend>image_transport</run_depend>
   <run_depend>cv_bridge</run_depend>
   <run_depend>OpenCV</run_depend>
   <run_depend>OpenGL</run_depend>
   <run_depend>compressed_image_transport</run_depend>
-  <run_depend>merbots_ibvs</run_depend>
-
 </package>

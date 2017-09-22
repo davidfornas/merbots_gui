@@ -18,13 +18,10 @@ find_package(
 		std_msgs
 		geometry_msgs
 		nav_msgs
-		sensor_msgs
-		cola2_msgs
-		auv_msgs
+                sensor_msgs
 		cv_bridge
 		image_transport
-		compressed_image_transport
-		merbots_ibvs
+                compressed_image_transport
 )
 
 find_package(OpenCV REQUIRED)
@@ -36,13 +33,10 @@ catkin_package(
 	std_msgs
 	geometry_msgs
 	nav_msgs
-	sensor_msgs
-	cola2_msgs
-	auv_msgs
+        sensor_msgs
 	cv_bridge
 	image_transport
-	compressed_image_transport
-	merbots_ibvs
+        compressed_image_transport
 )
 
 include_directories(${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS}) 
