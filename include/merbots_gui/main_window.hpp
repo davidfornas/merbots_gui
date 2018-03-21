@@ -143,7 +143,6 @@ public Q_SLOTS:
 
 
     void getInitGraspPose();
-    void getInitGraspPoseRansac();
     void setSpecificationMode(int);
     void updateInteractiveSpecParams();
     void updateAndResetInteractiveSpecParams();
@@ -152,7 +151,7 @@ public Q_SLOTS:
     void updateGuidedSpecParamsSpin2();
     void updateGuidedSpecParamsSpin3();
     void publishSliders();
-	void armPublisher();
+    void armPublisher();
     void dredgingPublisher();
 
     void executeGrasping();

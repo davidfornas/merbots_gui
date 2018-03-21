@@ -64,7 +64,14 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 	setWindowIcon(QIcon(":/images/icon.png"));
 	ui.setupUi(this); // Calling this incidentally connects all ui's triggers to on_...() callbacks in this class.
   ui.mainTabs->setCurrentIndex(1);
-	ui.graspSpecTab->setCurrentIndex(0);
+  ui.graspSpecTab->setCurrentIndex(0);
+  ui.poseEstimationComboBox->insertItem(0,"RANSAC Sphere"); //Index 5
+  ui.poseEstimationComboBox->insertItem(0,"SuperQuadrics"); //Index 4
+  ui.poseEstimationComboBox->insertItem(0,"Plane based Box Est."); // Index 3
+  ui.poseEstimationComboBox->insertItem(0,"PCA"); //Index 2
+  ui.poseEstimationComboBox->insertItem(0,"Get from Topic"); // Index 1
+  ui.poseEstimationComboBox->insertItem(0,"RANSAC Cylinder Estimation"); //Index 0
+  ui.poseEstimationComboBox->setCurrentIndex(0);
 
     //Booleans control
     g500CameraEnable   = false;
@@ -120,7 +127,6 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     QObject::connect(ui.g500GoToSurfaceButton, SIGNAL(clicked()), this, SLOT(g500GoToSurface()));
     
     QObject::connect(ui.getGraspingPoseButton, SIGNAL(clicked()), this, SLOT(getInitGraspPose()));
-    QObject::connect(ui.getGraspingPoseRansacButton, SIGNAL(clicked()), this, SLOT(getInitGraspPoseRansac()));
     QObject::connect(ui.graspSpecTab, SIGNAL(currentChanged(int)), this, SLOT(setSpecificationMode(int)));
     QObject::connect(ui.interactiveSpecSlider1, SIGNAL(sliderMoved(int)), this, SLOT(updateInteractiveSpecParams()));
     QObject::connect(ui.interactiveSpecSlider2, SIGNAL(sliderMoved(int)), this, SLOT(updateInteractiveSpecParams()));
@@ -644,14 +650,26 @@ void MainWindow::g500GoToSurface()
 
 void MainWindow::getInitGraspPose(){
   std_msgs::String msg;
-  msg.data = "initFromPose";
-  pub_spec_action.publish(msg);
-  ros::spinOnce();
-}
-
-void MainWindow::getInitGraspPoseRansac(){
-  std_msgs::String msg;
-  msg.data = "initFromRansac";
+  switch( ui.poseEstimationComboBox->currentIndex() ){
+  case 0:
+    msg.data = "initFromRansac";
+    break;
+  case 1:
+    msg.data = "initFromPose";
+    break;
+  case 2:
+    msg.data = "initFromPCA";
+    break;
+  case 3:
+    msg.data = "initFromBox";
+    break;
+  case 4:
+    msg.data = "initFromSQ";
+    break;
+  case 5:
+    msg.data = "initFromSphere";
+    break;
+  }
   pub_spec_action.publish(msg);
   ros::spinOnce();
 }
