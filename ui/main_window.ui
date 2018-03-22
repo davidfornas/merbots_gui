@@ -777,6 +777,22 @@
                       <enum>Qt::Horizontal</enum>
                      </property>
                     </widget>
+                    <widget class="QLabel" name="label_6">
+                     <property name="geometry">
+                      <rect>
+                       <x>12</x>
+                       <y>110</y>
+                       <width>221</width>
+                       <height>20</height>
+                      </rect>
+                     </property>
+                     <property name="text">
+                      <string>Object Width: 0.0 cm.</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
                    </widget>
                   </widget>
                  </item>

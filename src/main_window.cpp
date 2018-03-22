@@ -65,12 +65,12 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 	ui.setupUi(this); // Calling this incidentally connects all ui's triggers to on_...() callbacks in this class.
   ui.mainTabs->setCurrentIndex(1);
   ui.graspSpecTab->setCurrentIndex(0);
-  ui.poseEstimationComboBox->insertItem(0,"RANSAC Sphere"); //Index 5
+  ui.poseEstimationComboBox->insertItem(0,"Get from topic"); // Index 5
   ui.poseEstimationComboBox->insertItem(0,"SuperQuadrics"); //Index 4
-  ui.poseEstimationComboBox->insertItem(0,"Plane based Box Est."); // Index 3
+  ui.poseEstimationComboBox->insertItem(0,"Plane based Box"); // Index 3
   ui.poseEstimationComboBox->insertItem(0,"PCA"); //Index 2
-  ui.poseEstimationComboBox->insertItem(0,"Get from Topic"); // Index 1
-  ui.poseEstimationComboBox->insertItem(0,"RANSAC Cylinder Estimation"); //Index 0
+  ui.poseEstimationComboBox->insertItem(0,"RANSAC Sphere"); //Index 1
+  ui.poseEstimationComboBox->insertItem(0,"RANSAC Cylinder"); //Index 0
   ui.poseEstimationComboBox->setCurrentIndex(0);
 
     //Booleans control
@@ -655,7 +655,7 @@ void MainWindow::getInitGraspPose(){
     msg.data = "initFromRansac";
     break;
   case 1:
-    msg.data = "initFromPose";
+    msg.data = "initFromSphere";
     break;
   case 2:
     msg.data = "initFromPCA";
@@ -667,7 +667,7 @@ void MainWindow::getInitGraspPose(){
     msg.data = "initFromSQ";
     break;
   case 5:
-    msg.data = "initFromSphere";
+    msg.data = "initFromPose";
     break;
   }
   pub_spec_action.publish(msg);
