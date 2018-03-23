@@ -177,6 +177,7 @@ public Q_SLOTS:
 */
     void armStateCallback(const sensor_msgs::JointState::ConstPtr& armStateMsg);
     void specParamsCallback(const std_msgs::Float32MultiArrayConstPtr& specificationParams);
+	void g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg);
 
 
 private Q_SLOTS:

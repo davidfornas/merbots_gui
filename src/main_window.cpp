@@ -75,7 +75,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 
     //Booleans control
     g500CameraEnable   = false;
-    g500CameraEnable2  = false;
+    g500CameraEnable2  = true;
 
     //Variable to control the 'diagnostics_agg' topic
     g500DiagnosticsErrorLevel = 0;
@@ -194,9 +194,10 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 
     srv_g500GoTo    = nh->serviceClient<cola2_msgs::Goto>(ui.g500TopicGoToService->text().toUtf8().constData());
 */
-    /*
+
     sub_g500Camera   = it.subscribe(ui.g500CameraTopic->text().toUtf8().constData(), 1, &MainWindow::g500CameraCallback, this);
-    sub_imageTopic   = it.subscribe(ui.vsCameraInput->text().toUtf8().constData(), 1, &MainWindow::vsInputImageCallback, this);
+	//sub_g500Camera   = it.subscribe(ui.g500CameraTopic->text().toUtf8().constData(), 1, &MainWindow::g500CameraCallback, this);
+   /* sub_imageTopic   = it.subscribe(ui.vsCameraInput->text().toUtf8().constData(), 1, &MainWindow::vsInputImageCallback, this);
 	sub_resultTopic  = it.subscribe(ui.vsResult->text().toUtf8().constData(), 1, &MainWindow::vsResultImageCallback, this);
 	pub_target		 = it.advertise(ui.vsCroppedImage->text().toUtf8().constData(), 1);
 */
@@ -486,6 +487,18 @@ void MainWindow::armCallback(const sensor_msgs::JointState::ConstPtr& mes){
 void MainWindow::armAngleCallback(const sensor_msgs::JointState::ConstPtr& mes){
 	for(int i=0;i<5;i++) angles_[i]=mes->position[i];
 }
+
+void MainWindow::g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg)
+{
+	QImage dest (msg->data.data(), msg->width, msg->height, QImage::Format_Indexed8);//_RGB888);
+	g500Image = dest.copy();
+	g500Pixmap = QPixmap::fromImage(g500Image);
+	//if (g500CameraEnable)
+	//	ui.g500StreamView->setPixmap(g500Pixmap);
+	if (g500CameraEnable2)
+		ui.g500StreamView2->setPixmap(g500Pixmap);
+}
+
 
 /*****************************************************************************
 ** Implementation [Slots]
