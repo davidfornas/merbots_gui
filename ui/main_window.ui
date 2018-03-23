@@ -63,7 +63,7 @@
          <locale language="English" country="Australia"/>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="mainTabs_vehicle">
          <attribute name="title">
@@ -1272,14 +1272,14 @@ grasping</string>
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>500</width>
+                     <width>359</width>
                      <height>270</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
+                     <width>640</width>
+                     <height>480</height>
                     </size>
                    </property>
                    <property name="text">
@@ -1527,7 +1527,7 @@ grasping</string>
                <item row="4" column="3">
                 <widget class="QLineEdit" name="g500CameraTopic">
                  <property name="text">
-                  <string>/stereo_camera/left/image_repub</string>
+                  <string>/stereo/left/image_raw</string>
                  </property>
                 </widget>
                </item>
