@@ -497,6 +497,7 @@ void MainWindow::g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg)
 	//	ui.g500StreamView->setPixmap(g500Pixmap);
 	if (g500CameraEnable2)
 		ui.g500StreamView2->setPixmap(g500Pixmap);
+	//ui.g500StreamView2->se
 }
 
 
