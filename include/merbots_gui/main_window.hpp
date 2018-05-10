@@ -23,6 +23,7 @@
 #include "ui_main_window.h"
 #include "qnode.hpp"
 #include "set_robot_pose.h"
+#include "set_params.h"
 
 #include <QtGui/QMainWindow>
 #include <QtOpenGL>
@@ -97,6 +98,7 @@ public:
     QString g500DiagnosticsErrorName, sparusDiagnosticsErrorName;
 
 	SetRobotPoseDlg *dlg;
+  SetParamsDlg *dlg2;
 
 	MainWindow(int argc, char** argv, QWidget *parent = 0);
 	~MainWindow();
@@ -160,6 +162,9 @@ public Q_SLOTS:
     void clearWaypoints();
     void removeLastWaypoint();
     void armTopicButtonClicked();
+
+    //DF: Revamped
+    void setParamsButtonClicked();
 
 
 	/******************************************

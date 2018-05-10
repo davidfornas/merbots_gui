@@ -22,6 +22,7 @@
 #include <QApplication>
 #include "../include/merbots_gui/main_window.hpp"
 #include "../include/merbots_gui/set_robot_pose.h"
+#include "../include/merbots_gui/set_params.h"
 
 
 /*****************************************************************************

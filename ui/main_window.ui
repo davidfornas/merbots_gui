@@ -531,7 +531,7 @@
                   </layout>
                  </item>
                  <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="setParamsButton">
                    <property name="minimumSize">
                     <size>
                      <width>165</width>
@@ -573,7 +573,7 @@
                     </size>
                    </property>
                    <property name="currentIndex">
-                    <number>2</number>
+                    <number>3</number>
                    </property>
                    <widget class="QWidget" name="arm_manual">
                     <attribute name="title">

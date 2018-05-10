@@ -20,6 +20,7 @@
 #include <iostream>
 #include "../include/merbots_gui/main_window.hpp"
 #include "../include/merbots_gui/set_robot_pose.h"
+#include "../include/merbots_gui/set_params.h"
 #include <math.h>
 
 #include <QtGui>
@@ -182,6 +183,8 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
     QObject::connect(ui.removeLastWaypointButton, SIGNAL(clicked()), this, SLOT(removeLastWaypoint()));
     QObject::connect(ui.armTopicButton, SIGNAL(clicked()), this, SLOT(armTopicButtonClicked()));
 
+    QObject::connect(ui.setParamsButton, SIGNAL(clicked()), this, SLOT(setParamsButtonClicked()));
+
 	//Connecting ROS callbacks
 	nh = new ros::NodeHandle();
     image_transport::ImageTransport it(*nh);
@@ -224,6 +227,9 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 	dlg = new SetRobotPoseDlg(nh, this);
     QObject::connect(dlg, SIGNAL(newRobotPose(double, double, double, double, double, double)),
     				 this, SLOT(setRobotPosition(double, double, double, double, double, double)));
+
+
+    dlg2 = new SetParamsDlg(nh, this);
 
     //Parameters to set content label to fill the label size
     ui.g500StreamView->setScaledContents(true);
@@ -587,6 +593,11 @@ void MainWindow::g500GoToPositionButtonClicked()
 {
     //This shows a QDialog to enter manually the robot desired position or get it from UWSim (ToDo)
 	dlg->show();
+}
+
+void MainWindow::setParamsButtonClicked()
+{
+  dlg2->show();
 }
 
 void MainWindow::setRobotPosition(double xValueSrv, double yValueSrv, double zValueSrv, double rollValueSrv, double pitchValueSrv, double yawValueSrv)
