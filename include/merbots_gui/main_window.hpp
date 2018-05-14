@@ -35,6 +35,8 @@
 
 #include <std_msgs/Bool.h>
 #include <std_msgs/String.h>
+#include <std_msgs/Float32.h>
+#include <std_msgs/Int8.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <std_srvs/Empty.h>
 //#include <auv_msgs/NavSts.h>
@@ -79,9 +81,10 @@ public:
 	ros::Subscriber		sub_g500Odometry, sub_g500MergedBodyVel, sub_g500MergedWorld, sub_g500Battery, sub_g500Runningtime, sub_g500Diagnostics;
 	ros::Subscriber		sub_sparusOdometry, sub_sparusMergedBodyVel, sub_sparusMergedWorld, sub_sparusBattery, sub_sparusRunningtime, sub_sparusDiagnostics;
 	ros::Subscriber		sub_arm_state;
-	ros::Subscriber		sub_spec_params;
+  ros::Subscriber		sub_spec_params, sub_score, sub_score_description, sub_metrics;
 	ros::Publisher		pub_spec_action, pub_spec_params;
 	ros::Publisher 		pub_dredg_action, pub_dredging;
+  ros::Publisher 		pub_grasp_id;
     ros::ServiceClient  srv_g500GoTo;
 	ros::ServiceClient 	srv_vsRotation, srv_vsCancel;
 
@@ -92,10 +95,10 @@ public:
 	sensor_msgs::ImagePtr 		croppedImageMsg;
 
 	bool activateVS;
-    bool g500CameraEnable, g500CameraEnable2, sparusCameraEnable;
-    int  g500DiagnosticsErrorLevel, sparusDiagnosticsErrorLevel;
+  bool g500CameraEnable, g500CameraEnable2, sparusCameraEnable;
+  int  g500DiagnosticsErrorLevel, sparusDiagnosticsErrorLevel;
     
-    QString g500DiagnosticsErrorName, sparusDiagnosticsErrorName;
+  QString g500DiagnosticsErrorName, sparusDiagnosticsErrorName;
 
 	SetRobotPoseDlg *dlg;
   SetParamsDlg *dlg2;
@@ -105,10 +108,10 @@ public:
 
 	void closeEvent(QCloseEvent *event); // Overloaded function
 	void showNoMasterMessage();
-    float rad2grad(double rads);
-    float trun2dec(double value);
+  float rad2grad(double rads);
+  float trun2dec(double value);
 
-    //Arm data
+  //Arm data
 	int axisindex[6];
 	int AxisDir[5];
 	int buttonindex[5], lastValue_[5];
@@ -124,6 +127,9 @@ public:
 	void armCallback(const sensor_msgs::JointState::ConstPtr& mes);
 	void armAngleCallback(const sensor_msgs::JointState::ConstPtr& mes);
 	sensor_msgs::JointState js;
+
+  // Esta variable controla que no se actualice continuamente los textos de score y metrics.
+  bool grasp_id_changed;
 
 
 Q_SIGNALS:
@@ -142,8 +148,6 @@ public Q_SLOTS:
     void setRobotPosition(double xValueSrv, double yValueSrv, double zValueSrv,
                         double rollValueSrv, double pitchValueSrv, double yawValueSrv);
 
-
-
     void getInitGraspPose();
     void setSpecificationMode(int);
     void updateInteractiveSpecParams();
@@ -152,6 +156,7 @@ public Q_SLOTS:
     void updateGuidedSpecParamsSpin1();
     void updateGuidedSpecParamsSpin2();
     void updateGuidedSpecParamsSpin3();
+    void updateGraspNumberSpinBox();
     void publishSliders();
     void armPublisher();
     void dredgingPublisher();
@@ -182,17 +187,21 @@ public Q_SLOTS:
 */
     void armStateCallback(const sensor_msgs::JointState::ConstPtr& armStateMsg);
     void specParamsCallback(const std_msgs::Float32MultiArrayConstPtr& specificationParams);
-	void g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg);
+    void g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg);
+
+    void scoreCallback(const std_msgs::Float32::ConstPtr& msg);
+    void scoreDescriptionCallback(const std_msgs::String::ConstPtr& msg);
+    void metricsCallback(const std_msgs::String::ConstPtr& msg);
 
 
 private Q_SLOTS:
 
 
 private:
-	Ui::MainWindowDesign	ui;
-	QNode 					qnode;
+    Ui::MainWindowDesign	ui;
+    QNode 					qnode;
 
-	QImage		imageTopic, g500Image, sparusImage;
+    QImage		imageTopic, g500Image, sparusImage;
     QPainter	painter;
     QPixmap		pixmapTopic, resultPixmapTopic, croppedPixmapTopic, g500Pixmap, sparusPixmap;
 
