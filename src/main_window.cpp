@@ -833,6 +833,7 @@ void MainWindow::updateGraspNumberSpinBox(){
   pub_grasp_id.publish( msg );
   ros::spinOnce();
   grasp_id_changed = true;
+  grasp_id_changed2 = true;
 
 }
 
@@ -897,8 +898,8 @@ void MainWindow::scoreDescriptionCallback(const std_msgs::String::ConstPtr& msg)
 }
 
 void MainWindow::metricsCallback(const std_msgs::String::ConstPtr& msg){
-  if(grasp_id_changed){
-    grasp_id_changed = false;
+  if(grasp_id_changed2){
+    grasp_id_changed2 = false;
     ui.graspMetrics->setText(QString::fromStdString(msg->data));
   }
 }

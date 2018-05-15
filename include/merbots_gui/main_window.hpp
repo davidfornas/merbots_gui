@@ -129,7 +129,7 @@ public:
 	sensor_msgs::JointState js;
 
   // Esta variable controla que no se actualice continuamente los textos de score y metrics.
-  bool grasp_id_changed;
+  bool grasp_id_changed, grasp_id_changed2;
 
 
 Q_SIGNALS:
