@@ -209,6 +209,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
   sub_arm_state	 = nh->subscribe<sensor_msgs::JointState>(ui.armTopic->text().toUtf8().constData(), 1, &MainWindow::armStateCallback, this);
   sub_spec_params	 = nh->subscribe<std_msgs::Float32MultiArray>("/specification_params_to_gui", 1, &MainWindow::specParamsCallback, this);
   sub_score = nh->subscribe<std_msgs::Float32>("/score", 1, &MainWindow::scoreCallback, this);
+  sub_score = nh->subscribe<std_msgs::Int32>("/list_size", 1, &MainWindow::listSizeCallback, this);
   sub_score_description = nh->subscribe<std_msgs::String>("/score_description", 1, &MainWindow::scoreDescriptionCallback, this);
   sub_metrics = nh->subscribe<std_msgs::String>("/metrics", 1, &MainWindow::metricsCallback, this);
 
@@ -828,12 +829,15 @@ void MainWindow::updateGuidedSpecParamsSpin3(){
 
 void MainWindow::updateGraspNumberSpinBox(){
 
+  grasp_id_changed = true;
+  grasp_id_changed2 = true;
+  score_description = ui.graspScoreDetail->toPlainText();
+  metrics = ui.graspMetrics->toPlainText();
+
   std_msgs::Int8 msg;
   msg.data = ui.graspNumberSpinBox->value();
   pub_grasp_id.publish( msg );
   ros::spinOnce();
-  grasp_id_changed = true;
-  grasp_id_changed2 = true;
 
 }
 
@@ -890,17 +894,26 @@ void MainWindow::scoreCallback(const std_msgs::Float32::ConstPtr& msg){
   ui.graspOverallScore->setText(QString::fromStdString( stringStream.str() ));
 }
 
+void MainWindow::listSizeCallback(const std_msgs::Int32::ConstPtr& msg){
+  ui.graspNumberSpinBox->setMaximum(msg->data-1);
+}
+
+
 void MainWindow::scoreDescriptionCallback(const std_msgs::String::ConstPtr& msg){
-  if(grasp_id_changed){
+  QString s;
+  s = QString::fromStdString(msg->data);
+  if( grasp_id_changed && score_description != s ){
     grasp_id_changed = false;
-    ui.graspScoreDetail->setText(QString::fromStdString(msg->data));
+    ui.graspScoreDetail->setText(s);
   }
 }
 
 void MainWindow::metricsCallback(const std_msgs::String::ConstPtr& msg){
-  if(grasp_id_changed2){
+  QString s;
+  s = QString::fromStdString(msg->data);
+  if( grasp_id_changed2 && metrics != s ){
     grasp_id_changed2 = false;
-    ui.graspMetrics->setText(QString::fromStdString(msg->data));
+    ui.graspMetrics->setText(s);
   }
 }
 

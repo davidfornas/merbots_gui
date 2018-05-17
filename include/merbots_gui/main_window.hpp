@@ -37,6 +37,7 @@
 #include <std_msgs/String.h>
 #include <std_msgs/Float32.h>
 #include <std_msgs/Int8.h>
+#include <std_msgs/Int32.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <std_srvs/Empty.h>
 //#include <auv_msgs/NavSts.h>
@@ -81,7 +82,7 @@ public:
 	ros::Subscriber		sub_g500Odometry, sub_g500MergedBodyVel, sub_g500MergedWorld, sub_g500Battery, sub_g500Runningtime, sub_g500Diagnostics;
 	ros::Subscriber		sub_sparusOdometry, sub_sparusMergedBodyVel, sub_sparusMergedWorld, sub_sparusBattery, sub_sparusRunningtime, sub_sparusDiagnostics;
 	ros::Subscriber		sub_arm_state;
-  ros::Subscriber		sub_spec_params, sub_score, sub_score_description, sub_metrics;
+  ros::Subscriber		sub_spec_params, sub_score, sub_score_description, sub_metrics, sub_list_size;
 	ros::Publisher		pub_spec_action, pub_spec_params;
 	ros::Publisher 		pub_dredg_action, pub_dredging;
   ros::Publisher 		pub_grasp_id;
@@ -130,6 +131,7 @@ public:
 
   // Esta variable controla que no se actualice continuamente los textos de score y metrics.
   bool grasp_id_changed, grasp_id_changed2;
+  QString metrics, score_description;
 
 
 Q_SIGNALS:
@@ -190,6 +192,7 @@ public Q_SLOTS:
     void g500CameraCallback(const sensor_msgs::Image::ConstPtr& msg);
 
     void scoreCallback(const std_msgs::Float32::ConstPtr& msg);
+    void listSizeCallback(const std_msgs::Int32::ConstPtr& msg);
     void scoreDescriptionCallback(const std_msgs::String::ConstPtr& msg);
     void metricsCallback(const std_msgs::String::ConstPtr& msg);
 
