@@ -573,7 +573,7 @@
                     </size>
                    </property>
                    <property name="currentIndex">
-                    <number>3</number>
+                    <number>0</number>
                    </property>
                    <widget class="QWidget" name="arm_manual">
                     <attribute name="title">
@@ -763,8 +763,8 @@
                     <widget class="QLabel" name="label_18">
                      <property name="geometry">
                       <rect>
-                       <x>40</x>
-                       <y>20</y>
+                       <x>100</x>
+                       <y>10</y>
                        <width>154</width>
                        <height>39</height>
                       </rect>
@@ -780,8 +780,8 @@
                     <widget class="QSlider" name="gripperOpeningSlider">
                      <property name="geometry">
                       <rect>
-                       <x>50</x>
-                       <y>70</y>
+                       <x>100</x>
+                       <y>60</y>
                        <width>150</width>
                        <height>29</height>
                       </rect>
@@ -804,6 +804,9 @@
                        <height>16777215</height>
                       </size>
                      </property>
+                     <property name="value">
+                      <number>60</number>
+                     </property>
                      <property name="orientation">
                       <enum>Qt::Horizontal</enum>
                      </property>
@@ -811,17 +814,33 @@
                     <widget class="QLabel" name="label_6">
                      <property name="geometry">
                       <rect>
-                       <x>12</x>
-                       <y>110</y>
+                       <x>70</x>
+                       <y>130</y>
                        <width>221</width>
                        <height>20</height>
                       </rect>
                      </property>
                      <property name="text">
-                      <string>Object Width: 0.0 cm.</string>
+                      <string>Object Width: 12.0 cm.</string>
                      </property>
                      <property name="alignment">
-                      <set>Qt::AlignCenter</set>
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_19">
+                     <property name="geometry">
+                      <rect>
+                       <x>70</x>
+                       <y>100</y>
+                       <width>221</width>
+                       <height>20</height>
+                      </rect>
+                     </property>
+                     <property name="text">
+                      <string>Gripper aperture: 18.0 cm.</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                      </property>
                     </widget>
                    </widget>
@@ -835,7 +854,7 @@
                        <x>0</x>
                        <y>9</y>
                        <width>351</width>
-                       <height>161</height>
+                       <height>166</height>
                       </rect>
                      </property>
                      <layout class="QFormLayout" name="formLayout">
@@ -1994,7 +2013,7 @@
      <x>0</x>
      <y>0</y>
      <width>1295</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
