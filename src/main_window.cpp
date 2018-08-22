@@ -209,7 +209,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
   sub_arm_state	 = nh->subscribe<sensor_msgs::JointState>(ui.armTopic->text().toUtf8().constData(), 1, &MainWindow::armStateCallback, this);
   sub_spec_params	 = nh->subscribe<std_msgs::Float32MultiArray>("/specification_params_to_gui", 1, &MainWindow::specParamsCallback, this);
   sub_score = nh->subscribe<std_msgs::Float32>("/score", 1, &MainWindow::scoreCallback, this);
-  sub_score = nh->subscribe<std_msgs::Int32>("/list_size", 1, &MainWindow::listSizeCallback, this);
+  sub_list_size = nh->subscribe<std_msgs::Int32>("/list_size", 1, &MainWindow::listSizeCallback, this);
   sub_score_description = nh->subscribe<std_msgs::String>("/score_description", 1, &MainWindow::scoreDescriptionCallback, this);
   sub_metrics = nh->subscribe<std_msgs::String>("/metrics", 1, &MainWindow::metricsCallback, this);
 
